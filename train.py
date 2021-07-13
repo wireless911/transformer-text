@@ -117,8 +117,8 @@ class TextClassifizerTrainer(Trainer):
 
         with torch.no_grad():
             for batch, data in enumerate(self.eval_dataloader):
-                y = data["labels"]
-                X = data["text"]
+                y = data["labels"].to(self.device)
+                X = data["text"].to(self.device)
 
                 pred = self.model(X)
                 loss = loss_fn(pred, y)
